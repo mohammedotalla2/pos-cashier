@@ -67,8 +67,7 @@ void GdiPrinter::renderReceipt(QPrinter *printer, const Sale &sale)
     // Set RTL layout
     painter.setLayoutDirection(Qt::RightToLeft);
 
-    int dpi = printer->resolution();
-    int pageWidth = printer->pageLayout().paintRectPixels(dpi).width();
+    int pageWidth = printer->width();
 
     // Fonts
     QFont titleFont("Arial", 18, QFont::Bold);

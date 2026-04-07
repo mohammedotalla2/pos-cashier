@@ -7,14 +7,16 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS
-    Core
-    Gui
-    Widgets
-    Sql
-    Network
-    PrintSupport
-)
+# Try Qt5 first (for Windows 7 compatibility), fall back to Qt6
+find_package(Qt5 COMPONENTS Core Gui Widgets Sql Network PrintSupport)
+if(Qt5_FOUND)
+    set(QT_VERSION_MAJOR 5)
+    message(STATUS "Using Qt5")
+else()
+    find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Sql Network PrintSupport)
+    set(QT_VERSION_MAJOR 6)
+    message(STATUS "Using Qt6")
+endif()
 
 set(SOURCES
     src/main.cpp
@@ -70,12 +72,12 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Core
-    Qt6::Gui
-    Qt6::Widgets
-    Qt6::Sql
-    Qt6::Network
-    Qt6::PrintSupport
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Sql
+    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::PrintSupport
 )
 
 # Install rules

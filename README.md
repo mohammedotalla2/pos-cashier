@@ -17,9 +17,10 @@
 
 ## المتطلبات
 
-- Qt 6.x
+- Qt 5.x أو Qt 6.x (يدعم كلا الإصدارين)
 - CMake 3.16+
 - مترجم C++17 (MSVC, GCC, Clang)
+- متوافق مع Windows 7 والأحدث (عند استخدام Qt 5)
 
 ## البناء
 
@@ -29,12 +30,15 @@ cmake ..
 cmake --build .
 ```
 
+يكتشف CMake تلقائياً إصدار Qt المثبت (يفضل Qt5 إن وُجد).
+
 ## البناء في VS Code
 
 1. تثبيت إضافة CMake Tools
 2. فتح المجلد في VS Code
 3. اختيار Kit المناسب (MSVC / GCC)
-4. بناء المشروع عبر CMake: Build
+4. التأكد من أن مسار Qt مضاف في PATH أو CMAKE_PREFIX_PATH
+5. بناء المشروع عبر CMake: Build
 
 ## الاستخدام
 
